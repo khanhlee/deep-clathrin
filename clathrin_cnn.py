@@ -1,12 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Nov 18 16:45:07 2018
-
-@author: khanhle
-"""
-
-# -*- coding: utf-8 -*-
-"""
 Created on Tue Oct  2 14:49:56 2018
 
 @author: khanhle
