@@ -1,4 +1,4 @@
-# deep-clathrin
+# Deep-Clathrin
 Identification of Clathrin proteins by incorporating hyperparameter optimization in deep learning and PSSM profiles
 
 Description:
