@@ -43,7 +43,7 @@ nb_classes = 2
 nb_kernels = 3
 nb_pools = 2
 batch_size = 10
-n_epochs = 50
+n_epochs = 80
 
 #class_weight = {0: 1., 1: 5.}
 #
@@ -73,6 +73,10 @@ def cnn_model():
     model.add(ZeroPadding2D((1,1)))
     model.add(Conv2D(64, (nb_kernels, nb_kernels), activation='relu'))
     model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_first"))
+    
+    model.add(ZeroPadding2D((1,1)))
+    model.add(Conv2D(128, (nb_kernels, nb_kernels), activation='relu'))
+    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_first"))
 
     ## add the model on top of the convolutional base
     model.add(Flatten())
@@ -83,7 +87,7 @@ def cnn_model():
     model.add(Activation('softmax'))
 
     # Compile model
-    model.compile(loss='binary_crossentropy', optimizer='adadelta', metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     return model
 
 def plot_confusion_matrix(cm, classes,
@@ -133,7 +137,7 @@ start = timeit.default_timer()
 for train, test in kfold.split(X, Y):
     model = cnn_model()   
     ## evaluate the model
-    model.fit(X[train], np_utils.to_categorical(Y[train],nb_classes), epochs=50, batch_size=batch_size, verbose=0)
+    model.fit(X[train], np_utils.to_categorical(Y[train],nb_classes), epochs=n_epochs, batch_size=batch_size, verbose=0)
     # evaluate the model
     scores = model.evaluate(X[test], np_utils.to_categorical(Y[test],nb_classes), verbose=0)
     print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
@@ -159,7 +163,7 @@ print(model.summary())
 #filepath = "weights.best.hdf5"
 #checkpointer = ModelCheckpoint(filepath, monitor='val_acc', verbose=0, save_best_only=True, save_weights_only=True)
 ## balance data
-model.fit(X, np_utils.to_categorical(Y, nb_classes), epochs=50, batch_size=batch_size, verbose=0, class_weight='auto')
+model.fit(X, np_utils.to_categorical(Y, nb_classes), epochs=n_epochs, batch_size=batch_size, verbose=0, class_weight='auto')
 ### evaluate the model
 scores = model.evaluate(X1, Y1)
 print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
