@@ -81,7 +81,7 @@ def cnn_model():
     ## add the model on top of the convolutional base
     model.add(Flatten())
     model.add(Dropout(0.2))
-    model.add(Dense(64))
+    model.add(Dense(128))
     model.add(Activation('relu'))
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))
@@ -126,7 +126,7 @@ def plot_confusion_matrix(cm, classes,
     
 #
 # define 10-fold cross validation test harness
-kfold = StratifiedKFold(n_splits=5, shuffle=True)
+kfold = StratifiedKFold(n_splits=10, shuffle=True)
 cvscores = []
 # SVM
 import timeit
