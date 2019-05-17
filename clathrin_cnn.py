@@ -68,15 +68,15 @@ def cnn_model():
 
     model.add(ZeroPadding2D((1,1), input_shape = (1,20,20)))
     model.add(Conv2D(32, (nb_kernels, nb_kernels), activation='relu'))
-    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_first"))
+    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_last"))
     
     model.add(ZeroPadding2D((1,1)))
     model.add(Conv2D(64, (nb_kernels, nb_kernels), activation='relu'))
-    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_first"))
+    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_last"))
     
     model.add(ZeroPadding2D((1,1)))
     model.add(Conv2D(128, (nb_kernels, nb_kernels), activation='relu'))
-    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_first"))
+    model.add(MaxPooling2D(strides=(nb_pools, nb_pools), data_format="channels_last"))
 
     ## add the model on top of the convolutional base
     model.add(Flatten())
