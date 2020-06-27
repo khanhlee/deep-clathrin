@@ -1,5 +1,7 @@
 # Deep-Clathrin: Identification of clathrin proteins by incorporating hyperparameter optimization in deep learning and PSSM profiles
 
+![Image browser window](deep-clathrin.jpg)
+
 Description:
 - clathrin_cnn.py: 2D CNN structure
 - data: list all of the data used in the study
